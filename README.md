@@ -6,3 +6,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 4.node app.js to start server - Backend-nodejs
 5.ng serve - to start with frontend part in angular
 
+take a look on summary.txt file -> Backend-nodejs
