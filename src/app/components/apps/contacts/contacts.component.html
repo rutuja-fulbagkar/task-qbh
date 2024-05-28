@@ -1,0 +1,259 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header class="border-bottom">
+                <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+                    <h5 class="mb-0"> Data Visualization</h5>
+
+                </div>
+                <button mat-flat-button class="default-btn tagus" routerLink="/form">
+                    <i class="ri-add-fill"></i> Add User
+                </button>
+
+            </mat-card-header>
+            <mat-card-content>
+                <mat-card class="mb-25 tagus-card">
+                    <mat-card-content>
+                        <div class="tagus-form-group">
+                            <mat-form-field appearance="fill">
+                                <i class="ri-search-line"></i>
+                                <mat-label>Filter</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" #input>
+                            </mat-form-field>
+                        </div>
+                        <div class="mat-elevation-z8 tagus-mat-table">
+                            <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+                            <table mat-table [dataSource]="dataSource" matSort
+                                (matSortChange)="announceSortChange($event)">
+
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="select">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                                            [checked]="selection.hasValue() && isAllSelected()"
+                                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                            [aria-label]="checkboxLabel()">
+                                        </mat-checkbox>
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <mat-checkbox (click)="$event.stopPropagation()"
+                                            (change)="$event ? selection.toggle(row) : null"
+                                            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                        </mat-checkbox>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Image Column -->
+                                <ng-container matColumnDef="image">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Sr.No</th>
+                                    <td mat-cell *matCellDef="let element = index">
+                                        {{element+1}}
+                                    </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                                    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                                </ng-container>
+
+                                <!-- Phone Number Column -->
+                                <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                                    <td mat-cell *matCellDef="let element">{{element.email}}</td>
+                                </ng-container>
+                                <!-- Phone Number Column -->
+                                <ng-container matColumnDef="phnno">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</th>
+                                    <td mat-cell *matCellDef="let element">{{element.phnno}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="address">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+                                    <td mat-cell *matCellDef="let element">{{element.address}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="pdf">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Generated PDF</th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <button mat-menu-item type="button"
+                                            class="bg-transparent border-none position-relative">
+                                            <!-- <span [innerHTML]="element.pdf != null ? 
+                                                '<img src=\'assets/img/icon/pdf.png\' alt=\'pdf\'>' :
+                                                 'file not generated'">
+                                            </span> -->
+                                             
+                                                <img src='assets/img/icon/pdf.png' alt='pdf'  (click)="downloadPdf(element.id)">
+                                               
+                                           
+                                             
+                                        </button>
+
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <button type="button" mat-button
+                                            class="position-relative dot-btn p-0 bg-transparent border-none"
+                                            [matMenuTriggerFor]="monthMenu">
+                                            <i class="ri-more-fill"></i>
+                                        </button>
+                                        <mat-menu #monthMenu="matMenu" class="dotMenu monthMenu" xPosition="before">
+                                            <button mat-menu-item type="button" (click)="view01(element.id)"
+                                                class="bg-transparent border-none position-relative">
+                                                <i class="ri-edit-2-line"></i> Edit
+                                            </button>
+
+                                            <button mat-menu-item type="button" (click)="deleteUser(element.id)"
+                                                class="bg-transparent border-none position-relative">
+                                                <i class="ri-delete-bin-6-line"></i> Delete
+                                            </button>
+                                            <!-- <button mat-menu-item type="button" (click)="generatePdf()"
+                                                class="bg-transparent border-none position-relative">
+                                                <i class="ri-add-circle-line"></i> Generate
+                                            </button> -->
+                                            <button mat-menu-item type="button" (click)="downloadPdf(element.id)"
+                                                class="bg-transparent border-none position-relative">
+                                                <i class="ri-download-cloud-2-line"></i> Download
+                                            </button>
+                                            <button mat-menu-item type="button" (click)="viewPdf(element.id)"
+                                                class="bg-transparent border-none position-relative">
+                                                <i class="ri-eye-line"></i> View
+
+                                            </button>
+
+
+                                        </mat-menu>
+
+
+
+                                    </td>
+                                </ng-container>
+
+                                <!-- Email Column -->
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                    (click)="selection.toggle(row)"></tr>
+
+                            </table>
+
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+
+                <!-- modal -->
+                <ng-container *ngIf="viewfb1 == 1">
+
+                    <div class="p-30 dialog-container align-items-center">
+                        <h5 class="mb-0" style=" text-align: center; margin: 10px; color:rgba(0, 68, 255, 0.404);">
+                            Update User Details :
+                        </h5>
+                        <hr>
+                        <div class="tagus-form-group">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="tagus-form-group">
+                                        <label class="d-block mb-12 fw-semibold gray-color"> Name</label>
+                                        <mat-form-field appearance="fill">
+                                            <i class="ri-user-3-line"></i>
+                                            <mat-label>Enter name</mat-label>
+                                            <input matInput #name [value]="userbyid.name">
+                                            <input type="hidden" #id [value]="userbyid.id">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="tagus-form-group">
+                                        <label class="d-block mb-12 fw-semibold gray-color">Email Address
+                                            <span>*</span></label>
+                                        <mat-form-field appearance="fill">
+                                            <i class="ri-mail-line"></i>
+                                            <mat-label>Enter email address</mat-label>
+                                            <input matInput #email [value]="userbyid.email">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="tagus-form-group">
+                                        <label class="d-block mb-12 fw-semibold gray-color">Phone</label>
+                                        <mat-form-field appearance="fill">
+                                            <i class="ri-phone-line"></i>
+                                            <mat-label>Enter phone number</mat-label>
+                                            <input matInput #phnno [value]="userbyid.phnno">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="tagus-form-group">
+                                        <label class="d-block mb-12 fw-semibold gray-color">Address</label>
+                                        <mat-form-field appearance="fill">
+                                            <i class="ri-map-pin-line"></i>
+                                            <mat-label>Enter location</mat-label>
+                                            <input matInput #address [value]="userbyid.address">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-card-content class="example-buttons">
+                                <button mat-raised-button color="warn" (click)="closeview01()">Close</button>
+                                <button mat-raised-button class="tagus" type="submit"
+                                    (click)="updateUser(id.value,name.value,email.value,phnno.value,address.value)">Update</button>
+
+                            </mat-card-content>
+
+                        </div>
+                        <br>
+                        <br>
+                        <hr>
+
+
+                    </div>
+
+                </ng-container>
+                <!-- pdf  -->
+
+
+                <ng-container *ngIf="viewpdf == 1">
+
+                    <div class="p-30 dialog-container align-items-center">
+                        <h5 class="mb-0" style=" text-align: center; margin: 10px; color:rgba(0, 68, 255, 0.404);">
+                            view the generated PDF :
+                        </h5>
+                        <hr>
+                        <div class="tagus-form-group">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="tagus-form-group">
+                                        <div *ngIf="pdfUrl" style="margin-top: 20px;">
+                                            <iframe [src]="pdfUrl" width="100%" height="600px"></iframe>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <mat-card-content class="example-buttons">
+                                <button mat-raised-button color="warn" (click)="closeview01()">Close</button>
+
+                            </mat-card-content>
+
+                        </div>
+                        <br>
+                        <br>
+                        <hr>
+
+
+                    </div>
+
+                </ng-container>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+
+
+</div>

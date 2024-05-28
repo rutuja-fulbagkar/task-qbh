@@ -1,0 +1,55 @@
+npm init 
+npm install express mysql2 sequelize body-parser pdfkit
+npm install cors
+node app.js
+
+npm install sweetalert2 --force
+
+
+////////////////////////////////////////////////////////////////////
+For Backend :
+
+Certainly! Here's a brief overview of the additional libraries or packages used in the Node.js
+ backend for the APIs I've implemented, along with instructions on how to run the application locally.
+
+**Additional Libraries or Packages Used :
+Express: Used for building the RESTful API server and handling HTTP requests.
+
+Body-parser: Middleware used to parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+
+MySQL: Node.js driver for MySQL. It allows Node.js to connect with MySQL databases and execute SQL queries.
+
+PDFKit: A PDF generation library for Node.js, used to dynamically generate PDF documents.
+
+Cors: Middleware for enabling CORS (Cross-Origin Resource Sharing) in Express applications.
+
+**Instructions to Run Locally
+Prerequisites:
+Node.js installed on your machine.
+MySQL database setup with the exported database schema.- import db file in mysql 
+
+///////////////////////////////////////////////////////////////////////////////
+
+For fronntend angular - v16 :
+Here's a brief overview of the frontend setup using Angular and Angular Material, 
+along with other dependencies I've listed:
+
+1. Angular Core Modules:
+@angular/core, @angular/common, @angular/compiler, @angular/platform-browser: 
+Core Angular modules for building Angular applications.
+
+2. Angular Material:
+ @angular/material, @angular/cdk:
+ Angular Material components and the Component Dev Kit (CDK) for Angular Material.
+
+4 .Angular Forms:
+@angular/forms:
+ Module for handling Angular forms, including reactive forms and form validation.
+
+5.Angular Router:
+@angular/router: 
+Module for handling routing in Angular applications.
+
+6.Flex Layout:
+@angular/flex-layout: 
+Angular layout engine for Flexbox CSS, used for responsive design in Angular applications.

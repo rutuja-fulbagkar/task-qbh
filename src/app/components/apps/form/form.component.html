@@ -1,0 +1,70 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0"> Enquiry Form</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i>
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Enquiry Form</li>
+    </ol>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+   
+    <mat-card-content>
+        <form [formGroup]="formData" (ngSubmit)="submit()">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color"> Name</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Enter name</mat-label>
+                            <input matInput formControlName="name">
+                        </mat-form-field>
+                    </div>
+                </div>
+             
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-mail-line"></i>
+                            <mat-label>Enter email address</mat-label>
+                            <input matInput formControlName="email">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Phone</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-phone-line"></i>
+                            <mat-label>Enter phone number</mat-label>
+                            <input matInput formControlName="phnno">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Address</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-map-pin-line"></i>
+                            <mat-label>Enter location</mat-label>
+                            <input matInput formControlName="address">
+                        </mat-form-field>
+                    </div>
+                </div>
+               
+
+                <button mat-flat-button type="submit" class="tagus fw-semibold">Submit Now</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+
+
+ 

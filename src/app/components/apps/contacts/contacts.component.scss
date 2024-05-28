@@ -1,0 +1,106 @@
+@media only screen and (max-width : 767px) {
+
+    .mat-elevation-z8 {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+        &::-webkit-scrollbar:vertical {
+            width: 10px;
+        }
+        &::-webkit-scrollbar:horizontal {
+            height: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            border: 2px solid var(--whiteColor);
+            background-color: rgba(0, 0, 0, .2);
+        }
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;  
+            background-color: var(--whiteColor);
+        }
+    }
+    .component-dark-theme {
+        .mat-elevation-z8 {
+            &::-webkit-scrollbar-thumb {
+                border-color: #1f2226;
+                background-color: rgba(255, 255, 255, .2);
+            }
+            &::-webkit-scrollbar-track {
+                background-color: #1f2226;
+            }
+        }
+    }
+
+}
+
+
+// modal
+ 
+ 
+.dialog-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid #e2e0e0;
+    max-width: 80%;
+    width: 50%;
+    padding: 20px;
+    z-index: 1000; /* Ensure a higher z-index if necessary */
+}
+
+
+
+
+/* Modal Header Styles (h5) */
+.dialog-container h5 {
+    text-align: center;
+    margin: 10px;
+    color: rgba(0, 68, 255, 0.404);
+}
+
+/* Modal Content (Buttons, etc.) Styles */
+.dialog-container button {
+    font-size: 12px;
+    border: double;
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+/* Close Button Style */
+.dialog-container .mat-dialog-actions button {
+    background-color: #d03f3f;
+    color: white;
+    font-size: 12px;
+    border: double;
+    padding: 12px 30px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+    /* Adjust modal width for smaller screens */
+    .dialog-container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Adjust modal width for even smaller screens */
+    .dialog-container {
+        width: 95%;
+    }
+}
